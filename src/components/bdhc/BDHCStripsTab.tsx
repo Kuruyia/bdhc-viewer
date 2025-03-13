@@ -100,7 +100,7 @@ const BDHCStripsTab: React.FC<BDHCStripsTableProps> = (props) => {
         <Table.Thead>
           <Table.Tr>
             <Table.Th>Index</Table.Th>
-            <Table.Th>Lower bound</Table.Th>
+            <Table.Th>Scanline</Table.Th>
             <Table.Th>Access list index</Table.Th>
             <Table.Th>Access list count</Table.Th>
           </Table.Tr>
