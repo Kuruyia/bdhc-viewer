@@ -6,6 +6,8 @@ file and render them.
 BDHC files are used by 4th gen Pokémon games to store the height data of
 each map.
 
+Check it out online [here](https://kuruyia.github.io/bdhc-viewer/)!
+
 > [!NOTE]
 > Compatibility with the different games is as follows:
 >
@@ -17,6 +19,10 @@ each map.
 > Code quality may hurt your eyes a bit.
 
 ## Screenshots
+
+![Viewing plates](https://github.com/user-attachments/assets/b5c3d23c-ba31-4d32-9bc0-f8ec0c4a2723)
+
+![Viewing strips](https://github.com/user-attachments/assets/93028991-72d5-466d-bf5a-97df14777147)
 
 ## Getting started
 
