@@ -24,8 +24,8 @@ const BDHCHeightCalculator: React.FC<BDHCHeightCalcTableProps> = (props) => {
   // State
   const [selectedPlateValue, setSelectedPlateValue] =
     useState<string>(SelectCustomValue);
-  const [slope, setSlope] = useState<Vec3D>({ x: 0, y: 0, z: 0 });
-  const [height, setHeight] = useState<number>(0);
+  const [normal, setNormal] = useState<Vec3D>({ x: 0, y: 0, z: 0 });
+  const [constant, setConstant] = useState<number>(0);
   const [objectPosition, setObjectPosition] = useState<Vec2D>({
     x: 0,
     y: 0,
@@ -73,45 +73,45 @@ const BDHCHeightCalculator: React.FC<BDHCHeightCalcTableProps> = (props) => {
 
     if (plate) {
       setSelectedPlateValue(value);
-      setSlope(plate.slope);
-      setHeight(plate.height);
+      setNormal(plate.normal);
+      setConstant(plate.constant);
     }
   };
 
-  const handleSlopeXChange = (value: number) => {
+  const handleNormalXChange = (value: number) => {
     if (isNaN(value)) {
       return;
     }
 
     setSelectedPlateValue(SelectCustomValue);
-    setSlope((prev) => ({ ...prev, x: value }));
+    setNormal((prev) => ({ ...prev, x: value }));
   };
 
-  const handleSlopeYChange = (value: number) => {
+  const handleNormalYChange = (value: number) => {
     if (isNaN(value)) {
       return;
     }
 
     setSelectedPlateValue(SelectCustomValue);
-    setSlope((prev) => ({ ...prev, y: value }));
+    setNormal((prev) => ({ ...prev, y: value }));
   };
 
-  const handleSlopeZChange = (value: number) => {
+  const handleNormalZChange = (value: number) => {
     if (isNaN(value)) {
       return;
     }
 
     setSelectedPlateValue(SelectCustomValue);
-    setSlope((prev) => ({ ...prev, z: value }));
+    setNormal((prev) => ({ ...prev, z: value }));
   };
 
-  const handleHeightChange = (value: number) => {
+  const handleConstantChange = (value: number) => {
     if (isNaN(value)) {
       return;
     }
 
     setSelectedPlateValue(SelectCustomValue);
-    setHeight(value);
+    setConstant(value);
   };
 
   const handleObjectPositionXChange = (value: number) => {
@@ -131,7 +131,7 @@ const BDHCHeightCalculator: React.FC<BDHCHeightCalcTableProps> = (props) => {
   };
 
   const handleCalculate = () => {
-    setResult(calculateHeight(slope, height, objectPosition));
+    setResult(calculateHeight(normal, constant, objectPosition));
   };
 
   return (
@@ -165,31 +165,31 @@ const BDHCHeightCalculator: React.FC<BDHCHeightCalcTableProps> = (props) => {
             padding: 4,
           }}
         >
-          <Text fw={600}>Slope</Text>
+          <Text fw={600}>Normal vector</Text>
           <NumberInput
             placeholder="X"
             description="X"
-            value={slope.x}
+            value={normal.x}
             onChange={(v) =>
-              handleSlopeXChange(typeof v == "string" ? parseFloat(v) : v)
+              handleNormalXChange(typeof v == "string" ? parseFloat(v) : v)
             }
             hideControls
           />
           <NumberInput
             placeholder="Y"
             description="Y"
-            value={slope.y}
+            value={normal.y}
             onChange={(v) =>
-              handleSlopeYChange(typeof v == "string" ? parseFloat(v) : v)
+              handleNormalYChange(typeof v == "string" ? parseFloat(v) : v)
             }
             hideControls
           />
           <NumberInput
             placeholder="Z"
             description="Z"
-            value={slope.z}
+            value={normal.z}
             onChange={(v) =>
-              handleSlopeZChange(typeof v == "string" ? parseFloat(v) : v)
+              handleNormalZChange(typeof v == "string" ? parseFloat(v) : v)
             }
             hideControls
           />
@@ -203,13 +203,13 @@ const BDHCHeightCalculator: React.FC<BDHCHeightCalcTableProps> = (props) => {
             padding: 4,
           }}
         >
-          <Text fw={600}>Height</Text>
+          <Text fw={600}>Constant</Text>
           <NumberInput
-            placeholder="Height"
-            description="Height"
-            value={height}
+            placeholder="Constant"
+            description="Constant"
+            value={constant}
             onChange={(v) =>
-              handleHeightChange(typeof v == "string" ? parseFloat(v) : v)
+              handleConstantChange(typeof v == "string" ? parseFloat(v) : v)
             }
             hideControls
           />

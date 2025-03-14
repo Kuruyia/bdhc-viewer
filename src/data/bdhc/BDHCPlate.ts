@@ -5,13 +5,13 @@ import { BDHCPoint } from "./BDHCPoint.ts";
 export type BDHCPlate = {
   firstPointIndex: number;
   secondPointIndex: number;
-  slopeIndex: number;
-  heightIndex: number;
+  normalIndex: number;
+  constantIndex: number;
 
   index: number;
   firstPoint: BDHCPoint;
   secondPoint: BDHCPoint;
-  slope: Vec3D;
-  height: number;
+  normal: Vec3D;
+  constant: number;
   size: Vec2D;
 };

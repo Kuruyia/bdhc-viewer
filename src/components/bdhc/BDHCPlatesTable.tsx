@@ -30,10 +30,12 @@ const BDHCPlatesTable: React.FC<BDHCPlatesTableProps> = (props) => {
           ({elem.firstPoint.x}, {elem.firstPoint.y}) → ({elem.secondPoint.x},{" "}
           {elem.secondPoint.y})
         </Table.Td>
-        <Table.Td title={`Index: ${elem.slopeIndex}`}>
-          ({elem.slope.x}, {elem.slope.y}, {elem.slope.z})
+        <Table.Td title={`Index: ${elem.normalIndex}`}>
+          ({elem.normal.x}, {elem.normal.y}, {elem.normal.z})
         </Table.Td>
-        <Table.Td title={`Index: ${elem.heightIndex}`}>{elem.height}</Table.Td>
+        <Table.Td title={`Index: ${elem.constantIndex}`}>
+          {elem.constant}
+        </Table.Td>
         <Table.Td
           style={{
             display: "flex",
@@ -62,8 +64,8 @@ const BDHCPlatesTable: React.FC<BDHCPlatesTableProps> = (props) => {
         <Table.Tr>
           <Table.Th>Index</Table.Th>
           <Table.Th>Points</Table.Th>
-          <Table.Th>Slope</Table.Th>
-          <Table.Th>Height</Table.Th>
+          <Table.Th>Normal vector</Table.Th>
+          <Table.Th>Constant</Table.Th>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>{rows}</Table.Tbody>

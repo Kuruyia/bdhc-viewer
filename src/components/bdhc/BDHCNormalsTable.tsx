@@ -2,19 +2,20 @@ import { Table, useMantineTheme } from "@mantine/core";
 import * as React from "react";
 
 import { BDHCPlate } from "../../data/bdhc/BDHCPlate.ts";
+import { Vec3D } from "../../data/Vec3D.ts";
 
-export type BDHCHeightsTableProps = {
-  heights: number[];
+export type BDHCNormalsTableProps = {
+  normals: Vec3D[];
   selectedPlates?: BDHCPlate[];
 };
 
-const BDHCHeightsTable: React.FC<BDHCHeightsTableProps> = (props) => {
+const BDHCNormalsTable: React.FC<BDHCNormalsTableProps> = (props) => {
   // Hooks
   const theme = useMantineTheme();
 
-  const rows = props.heights.map((elem, index) => {
+  const rows = props.normals.map((elem, index) => {
     const isPlateSelected = props.selectedPlates?.some(
-      (plate) => plate.height === elem,
+      (plate) => plate.normal === elem,
     );
 
     return (
@@ -24,7 +25,9 @@ const BDHCHeightsTable: React.FC<BDHCHeightsTableProps> = (props) => {
         c={isPlateSelected ? theme.white : undefined}
       >
         <Table.Td style={{ fontWeight: "bold" }}>{index}</Table.Td>
-        <Table.Td>{elem}</Table.Td>
+        <Table.Td>{elem.x}</Table.Td>
+        <Table.Td>{elem.y}</Table.Td>
+        <Table.Td>{elem.z}</Table.Td>
       </Table.Tr>
     );
   });
@@ -34,7 +37,9 @@ const BDHCHeightsTable: React.FC<BDHCHeightsTableProps> = (props) => {
       <Table.Thead>
         <Table.Tr>
           <Table.Th>Index</Table.Th>
-          <Table.Th>Height</Table.Th>
+          <Table.Th>X</Table.Th>
+          <Table.Th>Y</Table.Th>
+          <Table.Th>Z</Table.Th>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>{rows}</Table.Tbody>
@@ -42,4 +47,4 @@ const BDHCHeightsTable: React.FC<BDHCHeightsTableProps> = (props) => {
   );
 };
 
-export default BDHCHeightsTable;
+export default BDHCNormalsTable;

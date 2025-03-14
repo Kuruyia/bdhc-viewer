@@ -14,12 +14,16 @@ export const floatToFx32 = (value: number) => {
 };
 
 export const calculateHeight = (
-  slope: Vec3D,
-  height: number,
+  normal: Vec3D,
+  constant: number,
   objectPosition: Vec2D,
 ) => {
-  let res = -(slope.x * objectPosition.x + slope.z * objectPosition.y + height);
-  res /= slope.y;
+  let res = -(
+    normal.x * objectPosition.x +
+    normal.z * objectPosition.y +
+    constant
+  );
+  res /= normal.y;
 
   // Intentional loss of precision to try being closer to what the game would actually calculate
   return fx32ToFloat(floatToFx32(res));

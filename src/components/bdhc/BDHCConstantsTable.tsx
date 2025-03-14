@@ -2,20 +2,19 @@ import { Table, useMantineTheme } from "@mantine/core";
 import * as React from "react";
 
 import { BDHCPlate } from "../../data/bdhc/BDHCPlate.ts";
-import { Vec3D } from "../../data/Vec3D.ts";
 
-export type BDHCSlopesTableProps = {
-  slopes: Vec3D[];
+export type BDHCConstantsTableProps = {
+  constants: number[];
   selectedPlates?: BDHCPlate[];
 };
 
-const BDHCSlopesTable: React.FC<BDHCSlopesTableProps> = (props) => {
+const BDHCConstantsTable: React.FC<BDHCConstantsTableProps> = (props) => {
   // Hooks
   const theme = useMantineTheme();
 
-  const rows = props.slopes.map((elem, index) => {
+  const rows = props.constants.map((elem, index) => {
     const isPlateSelected = props.selectedPlates?.some(
-      (plate) => plate.slope === elem,
+      (plate) => plate.constant === elem,
     );
 
     return (
@@ -25,9 +24,7 @@ const BDHCSlopesTable: React.FC<BDHCSlopesTableProps> = (props) => {
         c={isPlateSelected ? theme.white : undefined}
       >
         <Table.Td style={{ fontWeight: "bold" }}>{index}</Table.Td>
-        <Table.Td>{elem.x}</Table.Td>
-        <Table.Td>{elem.y}</Table.Td>
-        <Table.Td>{elem.z}</Table.Td>
+        <Table.Td>{elem}</Table.Td>
       </Table.Tr>
     );
   });
@@ -37,9 +34,7 @@ const BDHCSlopesTable: React.FC<BDHCSlopesTableProps> = (props) => {
       <Table.Thead>
         <Table.Tr>
           <Table.Th>Index</Table.Th>
-          <Table.Th>X</Table.Th>
-          <Table.Th>Y</Table.Th>
-          <Table.Th>Z</Table.Th>
+          <Table.Th>Constant</Table.Th>
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody>{rows}</Table.Tbody>
@@ -47,4 +42,4 @@ const BDHCSlopesTable: React.FC<BDHCSlopesTableProps> = (props) => {
   );
 };
 
-export default BDHCSlopesTable;
+export default BDHCConstantsTable;

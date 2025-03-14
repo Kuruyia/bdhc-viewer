@@ -26,12 +26,12 @@ const BDHCHeaderTable: React.FC<BDHCHeaderTableProps> = (props) => {
           <td>{props.header.pointsCount}</td>
         </tr>
         <tr>
-          <td style={leftColumnStyle}>Slopes count</td>
-          <td>{props.header.slopesCount}</td>
+          <td style={leftColumnStyle}>Normals count</td>
+          <td>{props.header.normalsCount}</td>
         </tr>
         <tr>
-          <td style={leftColumnStyle}>Heights count</td>
-          <td>{props.header.heightsCount}</td>
+          <td style={leftColumnStyle}>Constants count</td>
+          <td>{props.header.constantsCount}</td>
         </tr>
         <tr>
           <td style={leftColumnStyle}>Plates count</td>

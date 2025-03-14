@@ -22,8 +22,8 @@ const Plate: React.FC<PlateProps> = (props) => {
   const vertices = useMemo(() => {
     const topLeftPoint = props.plate.firstPoint;
     const bottomRightPoint = props.plate.secondPoint;
-    const slope = props.plate.slope;
-    const height = props.plate.height;
+    const normal = props.plate.normal;
+    const constant = props.plate.constant;
 
     const topRightPoint = { x: topLeftPoint.x, y: bottomRightPoint.y };
     const bottomLeftPoint = { x: bottomRightPoint.x, y: topLeftPoint.y };
@@ -31,19 +31,19 @@ const Plate: React.FC<PlateProps> = (props) => {
     return new Float32Array([
       // v0
       topLeftPoint.x,
-      calculateHeight(slope, height, topLeftPoint),
+      calculateHeight(normal, constant, topLeftPoint),
       topLeftPoint.y,
       // v1
       topRightPoint.x,
-      calculateHeight(slope, height, topRightPoint),
+      calculateHeight(normal, constant, topRightPoint),
       topRightPoint.y,
       // v2
       bottomRightPoint.x,
-      calculateHeight(slope, height, bottomRightPoint),
+      calculateHeight(normal, constant, bottomRightPoint),
       bottomRightPoint.y,
       // v3
       bottomLeftPoint.x,
-      calculateHeight(slope, height, bottomLeftPoint),
+      calculateHeight(normal, constant, bottomLeftPoint),
       bottomLeftPoint.y,
     ]);
   }, [props.plate]);

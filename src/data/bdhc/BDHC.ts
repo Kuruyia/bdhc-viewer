@@ -8,8 +8,8 @@ import { BDHCStrip } from "./BDHCStrip.ts";
 export class BDHC {
   private readonly _header: BDHCHeader;
   private readonly _points: BDHCPoint[];
-  private readonly _slopes: Vec3D[];
-  private readonly _heights: number[];
+  private readonly _normals: Vec3D[];
+  private readonly _constants: number[];
   private readonly _plates: BDHCPlate[];
   private readonly _strips: BDHCStrip[];
   private readonly _accessList: number[];
@@ -18,16 +18,16 @@ export class BDHC {
     this._header = {
       magic: "",
       pointsCount: 0,
-      slopesCount: 0,
-      heightsCount: 0,
+      normalsCount: 0,
+      constantsCount: 0,
       platesCount: 0,
       stripsCount: 0,
       accessListCount: 0,
     };
 
     this._points = [];
-    this._slopes = [];
-    this._heights = [];
+    this._normals = [];
+    this._constants = [];
     this._plates = [];
     this._strips = [];
     this._accessList = [];
@@ -48,21 +48,21 @@ export class BDHC {
       offset += 8;
     }
 
-    // Load slopes
-    for (let i = 0; i < this._header.slopesCount; i++) {
-      const slope = {
+    // Load normal vectors
+    for (let i = 0; i < this._header.normalsCount; i++) {
+      const normal = {
         x: fx32ToFloat(dataView.getInt32(offset, true)),
         y: fx32ToFloat(dataView.getInt32(offset + 4, true)),
         z: fx32ToFloat(dataView.getInt32(offset + 8, true)),
       } satisfies Vec3D;
 
-      this._slopes.push(slope);
+      this._normals.push(normal);
       offset += 12;
     }
 
-    // Load heights
-    for (let i = 0; i < this._header.heightsCount; i++) {
-      this._heights.push(fx32ToFloat(dataView.getInt32(offset, true)));
+    // Load constants
+    for (let i = 0; i < this._header.constantsCount; i++) {
+      this._constants.push(fx32ToFloat(dataView.getInt32(offset, true)));
       offset += 4;
     }
 
@@ -70,8 +70,8 @@ export class BDHC {
     for (let i = 0; i < this._header.platesCount; i++) {
       const firstPointIndex = dataView.getUint16(offset, true);
       const secondPointIndex = dataView.getUint16(offset + 2, true);
-      const slopeIndex = dataView.getUint16(offset + 4, true);
-      const heightIndex = dataView.getUint16(offset + 6, true);
+      const normalIndex = dataView.getUint16(offset + 4, true);
+      const constantIndex = dataView.getUint16(offset + 6, true);
 
       const firstPoint = this._points[firstPointIndex];
       const secondPoint = this._points[secondPointIndex];
@@ -79,13 +79,13 @@ export class BDHC {
       const plate = {
         firstPointIndex,
         secondPointIndex,
-        slopeIndex,
-        heightIndex,
+        normalIndex,
+        constantIndex,
         index: i,
         firstPoint,
         secondPoint,
-        slope: this._slopes[slopeIndex],
-        height: this._heights[heightIndex],
+        normal: this._normals[normalIndex],
+        constant: this._constants[constantIndex],
         size: calculateBDHCPointRectSize(firstPoint, secondPoint),
       } satisfies BDHCPlate;
 
@@ -135,8 +135,8 @@ export class BDHC {
     }
 
     this._header.pointsCount = dataView.getUint16(4, true);
-    this._header.slopesCount = dataView.getUint16(6, true);
-    this._header.heightsCount = dataView.getUint16(8, true);
+    this._header.normalsCount = dataView.getUint16(6, true);
+    this._header.constantsCount = dataView.getUint16(8, true);
     this._header.platesCount = dataView.getUint16(10, true);
     this._header.stripsCount = dataView.getUint16(12, true);
     this._header.accessListCount = dataView.getUint16(14, true);
@@ -150,12 +150,12 @@ export class BDHC {
     return this._points;
   }
 
-  public get slopes() {
-    return this._slopes;
+  public get normals() {
+    return this._normals;
   }
 
-  public get heights() {
-    return this._heights;
+  public get constants() {
+    return this._constants;
   }
 
   public get plates() {

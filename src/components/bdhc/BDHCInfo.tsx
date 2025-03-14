@@ -1,12 +1,12 @@
 import { Tabs } from "@mantine/core";
 import {
-  IconArrowsVertical,
   IconCalculator,
   IconDots,
   IconHeading,
+  IconLambda,
   IconList,
   IconRectangle,
-  IconSkewY,
+  IconStepOut,
   IconTable,
 } from "@tabler/icons-react";
 import * as React from "react";
@@ -15,12 +15,12 @@ import { BDHC } from "../../data/bdhc/BDHC.ts";
 import { BDHCPlate } from "../../data/bdhc/BDHCPlate.ts";
 import { BDHCStrip } from "../../data/bdhc/BDHCStrip.ts";
 import BDHCAccessListTable from "./BDHCAccessListTable.tsx";
+import BDHCConstantsTable from "./BDHCConstantsTable.tsx";
 import BDHCHeaderTable from "./BDHCHeaderTable.tsx";
 import BDHCHeightCalculator from "./BDHCHeightCalculator.tsx";
-import BDHCHeightsTable from "./BDHCHeightsTable.tsx";
+import BDHCNormalsTable from "./BDHCNormalsTable.tsx";
 import BDHCPlatesTable from "./BDHCPlatesTable.tsx";
 import BDHCPointsTable from "./BDHCPointsTable.tsx";
-import BDHCSlopesTable from "./BDHCSlopesTable.tsx";
 import BDHCStripsTab from "./BDHCStripsTab.tsx";
 
 export type BDHCInfoProps = {
@@ -48,14 +48,11 @@ const BDHCInfo: React.FC<BDHCInfoProps> = (props) => {
           <Tabs.Tab value="strips" leftSection={<IconTable size={16} />}>
             Strips
           </Tabs.Tab>
-          <Tabs.Tab value="slopes" leftSection={<IconSkewY size={16} />}>
-            Slopes
+          <Tabs.Tab value="normals" leftSection={<IconStepOut size={16} />}>
+            Normals
           </Tabs.Tab>
-          <Tabs.Tab
-            value="heights"
-            leftSection={<IconArrowsVertical size={16} />}
-          >
-            Heights
+          <Tabs.Tab value="constants" leftSection={<IconLambda size={16} />}>
+            Constants
           </Tabs.Tab>
           <Tabs.Tab value="points" leftSection={<IconDots size={16} />}>
             Points
@@ -92,16 +89,16 @@ const BDHCInfo: React.FC<BDHCInfoProps> = (props) => {
             />
           </Tabs.Panel>
 
-          <Tabs.Panel value="slopes">
-            <BDHCSlopesTable
-              slopes={props.bdhc.slopes}
+          <Tabs.Panel value="normals">
+            <BDHCNormalsTable
+              normals={props.bdhc.normals}
               selectedPlates={props.selectedPlates}
             />
           </Tabs.Panel>
 
-          <Tabs.Panel value="heights">
-            <BDHCHeightsTable
-              heights={props.bdhc.heights}
+          <Tabs.Panel value="constants">
+            <BDHCConstantsTable
+              constants={props.bdhc.constants}
               selectedPlates={props.selectedPlates}
             />
           </Tabs.Panel>
