@@ -26,7 +26,7 @@ const BDHCPointsTable: React.FC<BDHCPointsTableProps> = (props) => {
       >
         <Table.Td style={{ fontWeight: "bold" }}>{index}</Table.Td>
         <Table.Td>{elem.x}</Table.Td>
-        <Table.Td>{elem.y}</Table.Td>
+        <Table.Td>{elem.z}</Table.Td>
       </Table.Tr>
     );
   });

@@ -149,8 +149,8 @@ const BDHCHeightCalculator: React.FC<BDHCHeightCalcTableProps> = (props) => {
         {selectedPlate && (
           <Text c="dimmed" mt={4}>
             Plate points: ({selectedPlate.firstPoint.x},{" "}
-            {selectedPlate.firstPoint.y}) → ({selectedPlate.secondPoint.x},{" "}
-            {selectedPlate.secondPoint.y})
+            {selectedPlate.firstPoint.z}) → ({selectedPlate.secondPoint.x},{" "}
+            {selectedPlate.secondPoint.z})
           </Text>
         )}
       </div>

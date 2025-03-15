@@ -41,7 +41,7 @@ export class BDHC {
     for (let i = 0; i < this._header.pointsCount; i++) {
       const point = {
         x: fx32ToFloat(dataView.getInt32(offset, true)),
-        y: fx32ToFloat(dataView.getInt32(offset + 4, true)),
+        z: fx32ToFloat(dataView.getInt32(offset + 4, true)),
       };
 
       this._points.push(point);

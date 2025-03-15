@@ -27,8 +27,8 @@ const BDHCPlatesTable: React.FC<BDHCPlatesTableProps> = (props) => {
         <Table.Td
           title={`Indexes: ${elem.firstPointIndex} → ${elem.secondPointIndex}`}
         >
-          ({elem.firstPoint.x}, {elem.firstPoint.y}) → ({elem.secondPoint.x},{" "}
-          {elem.secondPoint.y})
+          ({elem.firstPoint.x}, {elem.firstPoint.z}) → ({elem.secondPoint.x},{" "}
+          {elem.secondPoint.z})
         </Table.Td>
         <Table.Td title={`Index: ${elem.normalIndex}`}>
           ({elem.normal.x}, {elem.normal.y}, {elem.normal.z})

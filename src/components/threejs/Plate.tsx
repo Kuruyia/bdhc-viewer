@@ -5,6 +5,7 @@ import { useMemo } from "react";
 import { DoubleSide } from "three";
 
 import { BDHCPlate } from "../../data/bdhc/BDHCPlate.ts";
+import { bdhcPointAsVec2D } from "../../data/bdhc/BDHCPoint.ts";
 import { calculateHeight } from "../../utils.ts";
 
 export type PlateProps = {
@@ -25,22 +26,22 @@ const Plate: React.FC<PlateProps> = (props) => {
     const normal = props.plate.normal;
     const constant = props.plate.constant;
 
-    const topRightPoint = { x: topLeftPoint.x, y: bottomRightPoint.y };
-    const bottomLeftPoint = { x: bottomRightPoint.x, y: topLeftPoint.y };
+    const topRightPoint = { x: topLeftPoint.x, y: bottomRightPoint.z };
+    const bottomLeftPoint = { x: bottomRightPoint.x, y: topLeftPoint.z };
 
     return new Float32Array([
       // v0
       topLeftPoint.x,
-      calculateHeight(normal, constant, topLeftPoint),
-      topLeftPoint.y,
+      calculateHeight(normal, constant, bdhcPointAsVec2D(topLeftPoint)),
+      topLeftPoint.z,
       // v1
       topRightPoint.x,
       calculateHeight(normal, constant, topRightPoint),
       topRightPoint.y,
       // v2
       bottomRightPoint.x,
-      calculateHeight(normal, constant, bottomRightPoint),
-      bottomRightPoint.y,
+      calculateHeight(normal, constant, bdhcPointAsVec2D(bottomRightPoint)),
+      bottomRightPoint.z,
       // v3
       bottomLeftPoint.x,
       calculateHeight(normal, constant, bottomLeftPoint),
